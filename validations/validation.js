@@ -4,45 +4,47 @@ function validationEmail(email){
 
     return regex.test(email)
 }
+const errors = [];
 const validationDataLogin = (email, senha) =>{
     if(!email){
-        return res.status(422).json({msg: "Campo email é obrigatório"})
+        errors.push("Campo email é obrigatório!");
     }
     if(!validationEmail(email)){
-        return res.status(422).json({msg: "Formato de email incorreto, tente: @example.com"})
+        errors.push("Formato de email incorreto, tente: @example.com")
     }
 
     if(!senha){
-        return res.status(422).json({msg: "Campo email é obrigatório"})
+        errors.push("Campo email é obrigatório")
     }
     if(senha.length < 5){
-        return res.status(422).json({msg: "senha muito pequena, minimo 8 caracteres"})
+        errors.push("senha muito pequena, minimo 8 caracteres!");
     }
+    return errors
 }
-const validationDataRegister = (nome, email, senha) =>{
+const validationDataRegister = (nome, email, senha, senhaConfim) =>{
     if (!nome) {
-        return res.status(422).json({ msg: "O nome é obrigatório!" });
+        errors.push("O nome é obrigatório!")
       }
     
     if (!email) {
-        return res.status(422).json({ msg: "O email é obrigatório!" });
+        errors.push("O email é obrigatório!")
     }
-    if(!validationEmail(email)){
-        return res.status(422).json({msg: "Formato de email incorreto, tente: @example.com"})
+    if(validationEmail(email)){
+        errors.push("Formato de email incorreto, tente: @example.com")
     }
 
     if (!senha) {
+        errors.push("A senha é obrigatória!")
     return res.status(422).json({ msg: "A senha é obrigatória!" });
     }
     if(senha.length < 5){
-        return res.status(422).json({msg: "senha muito pequena, minimo 8 caracteres"})
+        errors.push("senha muito pequena, minimo 8 caracteres")
     }
     
-    if (password != confirmpassword) {
-    return res
-        .status(422)
-        .json({ msg: "A senha e a confirmação precisam ser iguais!" });
+    if (senha != senhaConfim) {
+        errors.push("A senha e a confirmação precisam ser iguais!")
     }
+    return errors
 }
 module.exports ={
     validationDataLogin,
