@@ -12,6 +12,10 @@ const usuarioSchema = new mongoose.Schema({
     password:{
         type: String,
         require: true
+    },
+    passwordConfirm:{
+        type: String,
+        require: true
     }
 })
 
