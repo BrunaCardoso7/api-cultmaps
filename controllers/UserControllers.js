@@ -18,14 +18,19 @@ exports.Logged = async(req, res)=>{
 
 exports.createUser = async (req, res)=>{
     try {
-        const { password } = req.body
+        const {nome, email, password, passwordConfirm} = req.body
+        const validation = validations.validationDataRegister(nome, email, password, passwordConfirm)
+        if(validation.length > 0){
+            return res.status(422).json({errors: validation})
+        }
+        
         const  hashedPassaword = await bcrypt.hash(password, 10)
-
+        
         const usuario = new Usuario({
-            nome: req.body.nome,
-            email: req.body.email,
+            nome,
+            email,
             password: hashedPassaword,
-            passwordConfirm: req.body.passwordConfirm
+            passwordConfirm
         })
         await usuario.save()
         res.status(200).json({msg: "Wellcome to the CultMaps"})
@@ -35,17 +40,20 @@ exports.createUser = async (req, res)=>{
 }
 
 exports.login = async(req, res)=>{
-    const {nome, email} = req.body
+    const {password, email} = req.body
 
-    validations.validationDataLogin(nome, email)
+    // const validation  = validations.validationDataLogin(email, senha)
+    // if (validation.length > 0){
+    //     return res.status(422).json({ errors: validation });
+    // }
 
     const user = await Usuario.findOne({email: email})
 
     if(!user){
         return res.status(404).json({msg: "User not found"})
     }
-    
-    const checkPasswore = await bcrypt.compare(password, user.password)
+
+    const checkPasswore = bcrypt.compare(password, user.password)
 
     if(!checkPasswore){
         res.status(422).json({msg: "password invalid"})
@@ -57,9 +65,9 @@ exports.login = async(req, res)=>{
             {
                 id: user._id,
             },
-            secret
+            secret,
         )
-        res.status(200).json({msg: "Authetication realized sucessfully"})
+        res.status(200).json({msg: "Authetication realized sucessfully", token})
     } catch (error) {
         res.status(500).json({msg:"Athetications not completed, error: "+ error})
     }
