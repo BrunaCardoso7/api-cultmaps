@@ -40,7 +40,7 @@ exports.createUser = async (req, res)=>{
 }
 
 exports.login = async(req, res)=>{
-    const {password, email} = req.body
+    const {email, password} = req.body
 
     // const validation  = validations.validationDataLogin(email, senha)
     // if (validation.length > 0){
