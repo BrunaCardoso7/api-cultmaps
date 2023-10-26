@@ -23,6 +23,7 @@ exports.create =  async(req, res)=>{
         res.status(500).json({msg: "Error saving data"})
     }
 };
+
 exports.findAll = async(req, res)=>{
     try {
         const pictures = await Picture.find()
@@ -31,3 +32,4 @@ exports.findAll = async(req, res)=>{
         res.status(404).json({msg: "Image not found"})
     }
 }
+
