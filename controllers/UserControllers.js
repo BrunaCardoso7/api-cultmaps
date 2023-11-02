@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 require('dotenv').config()
 const jwt = require("jsonwebtoken");
 const validations = require('../validations/validation')
+const cookie = require('cookie')
 
 exports.Logged = async(req, res)=>{
     const id = req.params.id
@@ -67,6 +68,13 @@ exports.login = async(req, res)=>{
             },
             secret,
         )
+        res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 60 * 60 * 24 * 30,
+            sameSite: 'lax',
+            secure: true,
+        })
+        res.redirect('http://127.0.0.1:5502/frontend/index.html')
         res.status(200).json({msg: "Authetication realized sucessfully", token})
     } catch (error) {
         res.status(500).json({msg:"Athetications not completed, error: "+ error})
