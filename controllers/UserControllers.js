@@ -74,8 +74,8 @@ exports.login = async(req, res)=>{
             sameSite: 'lax',
             secure: true,
         })
-        res.redirect('http://127.0.0.1:5502/frontend/index.html')
-        res.status(200).json({msg: "Authetication realized sucessfully", token})
+        res.redirect('https://brunacardoso7.github.io/cultmaps/frontend/index.html')
+        // res.status(200).json({msg: "Authetication realized sucessfully", token})
     } catch (error) {
         res.status(500).json({msg:"Athetications not completed, error: "+ error})
     }
