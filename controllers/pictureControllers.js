@@ -18,7 +18,7 @@ exports.create =  async(req, res)=>{
             src: file.path
         })
         await picture.save()
-        res.redirect('http://127.0.0.1:5501/frontend/index.html')
+        res.redirect('http://127.0.0.1:5501/index.html')
         // res.status(200).json({msg: "data saved successfully"})
         // return res.redirect('http://127.0.0.1:5502/frontend/index.html')
     } catch (error) {
