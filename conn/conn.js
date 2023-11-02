@@ -6,7 +6,7 @@ const password = process.env.PASSWORD
 
 mongoose.set('strictQuery', true)
 async function main(){
-    await mongoose.connect(`mongodb+srv://obitadrawing:${password}@cluster0.ocujkg6.mongodb.net/?retryWrites=true&w=majority`)
+    await mongoose.connect(`mongodb+srv://obitadrawing:${password}@cluster0.bdo9bve.mongodb.net/?retryWrites=true&w=majority`)
     console.log('conexão com banco de dados estabelecida')
     
 }
