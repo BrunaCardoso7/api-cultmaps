@@ -40,7 +40,7 @@ exports.createUser = async (req, res)=>{
     }
 }
 
-exports.login = async(req, res)=>{
+exports.login = async(req, res, next)=>{
     const {email, password} = req.body
 
     // const validation  = validations.validationDataLogin(email, senha)
@@ -74,7 +74,8 @@ exports.login = async(req, res)=>{
             sameSite: 'lax',
             secure: true,
         })
-        res.redirect('https://brunacardoso7.github.io/cultmaps/frontend/index.html')
+        next()
+        // res.redirect('https://brunacardoso7.github.io/cultmaps/frontend/index.html')
         // res.status(200).json({msg: "Authetication realized sucessfully", token})
     } catch (error) {
         res.status(500).json({msg:"Athetications not completed, error: "+ error})
