@@ -17,5 +17,4 @@ function checkToken(req, res, next){
         res.status(400).json({msg:"Token not is validated"})
     }
 }
-    
 module.exports = checkToken
