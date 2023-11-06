@@ -65,17 +65,14 @@ exports.login = async(req, res, next)=>{
             sameSite: 'lax',
             secure: true,
         })
-        // res.redirect('https://brunacardoso7.github.io/cultmaps/frontend/index.html')
         res.status(200).json({msg: "Authetication realized sucessfully", token})
-        // res.redirect(`/logged/${user._id}`);
-        // next()
     } catch (error) {
         res.status(500).json({msg:"Athetications not completed, error: "+ error})
     }
 }
 
 exports.Logged = async(req, res)=>{
-    const id = req.params.id
+    const id = req.user.id
 
     const user = await Usuario.findById(id, "-password")
 
