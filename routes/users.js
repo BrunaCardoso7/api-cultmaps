@@ -23,7 +23,7 @@ function requireAuth(req, res, next) {
 
 router.post('/register', upload.none(), userControll.createUser)
 router.post('/login', upload.none(), userControll.login)
-router.get('/user/:id', requireAuth, userControll.Logged)
+router.get('/user', requireAuth, userControll.Logged)
 
 
 module.exports = router
