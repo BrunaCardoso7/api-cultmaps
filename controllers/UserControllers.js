@@ -45,7 +45,7 @@ exports.login = async(req, res, next)=>{
         return res.status(404).json({msg: "User not found"})
     }
     
-    const checkPasswore = bcrypt.compare(password, user.password)
+    const checkPasswore = await bcrypt.compare(password, user.password)
     
     if(!checkPasswore){
         res.status(422).json({msg: "password invalid"})
