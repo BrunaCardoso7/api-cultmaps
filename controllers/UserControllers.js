@@ -1,83 +1,86 @@
-const Usuario = require('../model/usuario')
-const bcrypt = require('bcrypt')
-require('dotenv').config()
-const jwt = require("jsonwebtoken");
-const validations = require('../validations/validation')
-const cookie = require('cookie')
+import Usuario from '../model/usuario.js'
+import bcrypt from 'bcrypt'
+import jwt  from 'jsonwebtoken';
+import userService from '../services/user.service.js'
+import dotenv from 'dotenv'
+dotenv.config()
+// const validations = require('../validations/validation')
 
 
-
-exports.createUser = async (req, res, next)=>{
+export const create = async (req, res, next)=>{
     try {
         const {nome, email, password, passwordConfirm} = req.body
-        const validation = validations.validationDataRegister(nome, email, password, passwordConfirm)
-        if(validation.length > 0){
-            return res.status(422).json({errors: validation})
+
+        if(!nome || !email || !password || !passwordConfirm){
+            res.status(400).send("preencha todos os campos")
         }
-        
-        const  hashedPassaword = await bcrypt.hash(password, 10)
-        
-        const usuario = new Usuario({
-            nome,
-            email,
-            password: hashedPassaword,
-            passwordConfirm
-        })
-        await usuario.save()
-        res.status(200).json({msg: "Wellcome to the CultMaps"})
-        next()
-    } catch (error) {
-        res.status(200).json({msg: "Error login"+error})
-    }
-}
+    
+        if(password !== passwordConfirm){
+            res.status(400).send("passwords not comfirm")
+        }
 
-exports.login = async(req, res, next)=>{
-    const {email, password} = req.body
-    
-    // const validation  = validations.validationDataLogin(email, senha)
-    // if (validation.length > 0){
-        //     return res.status(422).json({ errors: validation });
-        // }
-        
-    const user = await Usuario.findOne({email: email})
+        const user = await userService.createService(req.body)
 
-    if(!user){
-        return res.status(404).json({msg: "User not found"})
-    }
-    
-    const checkPasswore = await bcrypt.compare(password, user.password)
-    
-    if(!checkPasswore){
-        res.status(422).json({msg: "password invalid"})
-    }
-    try {
-        const secret = process.env.SECRET
-        
-        const  token = jwt.sign(
-            {
+        if(!user){
+            return res.status(500).send({msg:"error creating user"})
+        }
+
+        res.status(200).send({
+            msg:"created",
+            user:{
                 id: user._id,
-            },
-            secret,
-            )
-        res.cookie('token', token, {
-            httpOnly: true,
-            maxAge: 60 * 60 * 24 * 30,
-            sameSite: 'lax',
-            secure: true,
+                nome,
+                email
+            }
         })
-        res.status(200).json({msg: "Authetication realized sucessfully", token})
+        return next()
     } catch (error) {
-        res.status(500).json({msg:"Athetications not completed, error: "+ error})
+        return res.status(500).json({msg: "Error: "+error})
     }
 }
 
-exports.Logged = async(req, res)=>{
-    const id = req.user.id
-
-    const user = await Usuario.findById(id, "-password")
-
-    if(!user){
-        return res.status(404).json({msg: "User not found!"})
+export const findAll = async(req, res)=>{
+    try {
+        const users = await userService.findAllService()
+    
+        if(users.length === 0){
+            return res.status(400).send({msg:"There are no registered users"})
+        }
+        res.send(users)
+    } catch (error) {
+        res.status(500).send("error created:"+error)
     }
-    res.status(200).json({user, id})
+}
+
+
+export const findById = async(req, res)=>{
+    try {        
+        const user = req.user
+        res.send(user)
+    } catch (error) {
+        res.status(500).send("error findbyid:"+error)
+    }
+}
+
+export const update = async(req, res)=>{
+    try {     
+        const {nome, email, password, passwordConfirm} = req.body
+    
+        if(!nome && !email && !password && !passwordConfirm){
+            res.status(400).send("preencha todos os campos")
+        }
+    
+        const { id, user } = req
+    
+        await userService.updateService(
+            id,
+            nome, 
+            email, 
+            password,
+            passwordConfirm
+        )
+        res.send({msg:"user sucessfully updated"})
+    } catch (error) {
+        res.status(500).send("error update:"+error)
+    }
 }

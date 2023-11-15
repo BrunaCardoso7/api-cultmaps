@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 
-const PictureSchema = new Schema({
+const EventosSchema = new Schema({
     nome: {
         type: String,
         required: true
@@ -41,9 +41,22 @@ const PictureSchema = new Schema({
     },
     usuario_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Usuario'
+        ref: 'Usuario',
+        require: true
+    },
+    like:{
+        type: Array,
+        require: true
+    },
+    comentario:{
+        type: Array,
+        require: true
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now()
     }
 })
     
 
-module.exports = mongoose.model("Picture", PictureSchema)  
+export default mongoose.model("Eventos", EventosSchema)  

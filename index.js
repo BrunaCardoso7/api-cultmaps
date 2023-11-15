@@ -1,20 +1,29 @@
-const express = require('express')
+import express  from 'express';
 const app = express()
-const cors = require('cors')
-const cookieParser = require('cookie-parser');
-// ...
+
+import cors from'cors'
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv'
 app.use(cors())
 app.use(cookieParser());
 
-require("dotenv").config()
+dotenv.config()
 
-require('./conn/conn')
 
-const pictureRoter = require('./routes/picture')
-const userRouter = require('./routes/users')
+import './conn/conn.js'
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+import authRouter from './routes/authRouter.js'
+import eventsRouter from './routes/eventosRouters.js'
+import userRouter from './routes/usersRouters.js'
 
 app.use('/users', userRouter)
-app.use('/pictures', pictureRoter)
+app.use('/auth', authRouter)
+
+app.use('/eventos', eventsRouter)
 
 const port = process.env.PORT || 3000
 

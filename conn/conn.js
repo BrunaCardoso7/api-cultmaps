@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-
-require('dotenv').config
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const password = process.env.PASSWORD
 
@@ -12,4 +12,4 @@ async function main(){
 }
 main().catch(console.error('error na conexão'))
 
-module.exports = main
+export default main
