@@ -7,5 +7,4 @@ const secret = process.env.SECRET
 
 export const loginService = (email)=> 
     user.findOne({email: email}).select("+password")
-
 export const generateToken = (id)=> jwt.sign({id: id}, secret, {expiresIn: 86400})

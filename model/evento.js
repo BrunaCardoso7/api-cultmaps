@@ -32,12 +32,11 @@ const EventosSchema = new Schema({
         type: String, 
         required: true,
     },
-    name:{
-        type:String,
-        require: true
-    },src:{
-        type:String,
-        require: true
+    image: {    
+        src: {
+          type: String,
+          required: true
+        }
     },
     usuario_id:{
         type: mongoose.Schema.Types.ObjectId,
