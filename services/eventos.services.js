@@ -2,7 +2,7 @@ import { raw } from "express";
 import evento from "../model/evento.js";
 
 export const createService = (body)=>  evento.create(body)
-export const findAllService = (offset, limit)=>  evento.find().sort({_id: -1}).skip(offset).limit(limit).populate("Usuario")
+export const findAllService = (offset, limit)=>  evento.find().sort({_id: -1}).skip(offset).limit(limit).populate("usuario_id")
 export const countEvents = ()=> evento.countDocuments()
 export const topEventsService = () => evento.findOne().sort({_id: -1}).populate("Usuario")
 export const findByIdEvetnService = (id)=> evento.findById(id).populate("Usuario")
