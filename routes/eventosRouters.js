@@ -11,7 +11,7 @@ router.post("/", upload.single("file"), create)
 router.get("/", getAll)
 router.get("/top", topEvents)
 
-router.get("/search/:title", searchByTitle)
+router.get("/search", searchByTitle)
 
 router.get("/byUser", authMiddleware, byUser)
 router.patch("/:id", authMiddleware, update)
