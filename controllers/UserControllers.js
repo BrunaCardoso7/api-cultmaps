@@ -5,7 +5,7 @@ import userService from '../services/user.service.js'
 import dotenv from 'dotenv'
 dotenv.config()
 // const validations = require('../validations/validation')
-
+import { generateToken } from '../services/auth.service.js';
 
 export const create = async (req, res, next)=>{
     try {
@@ -24,9 +24,11 @@ export const create = async (req, res, next)=>{
         if(!user){
             return res.status(500).send({msg:"error creating user"})
         }
+        const token = generateToken(user.id)
 
         res.status(200).send({
             msg:"created",
+            token: token,
             user:{
                 id: user._id,
                 nome,
@@ -34,7 +36,7 @@ export const create = async (req, res, next)=>{
                 email
             }
         })
-        return next()
+        return next()   
     } catch (error) {
         return res.status(500).json({msg: "Error: "+error})
     }
