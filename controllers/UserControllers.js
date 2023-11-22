@@ -57,12 +57,15 @@ export const findAll = async(req, res)=>{
 
 
 export const findById = async(req, res)=>{
-    try {        
-        const user = req.user
-        res.send(user)
-    } catch (error) {
-        res.status(500).send("error findbyid:"+error)
-    }
+    try {
+        const user = await userService.findUserByIdService(
+          req.params.id,
+          req.userId
+        );
+        return res.send(user);
+      } catch (e) {
+        return res.status(400).send(e.message);
+      }
 }
 
 export const update = async(req, res)=>{
