@@ -9,15 +9,15 @@ dotenv.config()
 
 export const create = async (req, res, next)=>{
     try {
-        const {nome, email, password, passwordConfirm} = req.body
+        const {nome, usuario, email, password} = req.body
 
-        if(!nome || !email || !password || !passwordConfirm){
+        if(!nome|| !usuario || !email || !password){
             res.status(400).send("preencha todos os campos")
         }
     
-        if(password !== passwordConfirm){
-            res.status(400).send("passwords not comfirm")
-        }
+        // if(password !== passwordConfirm){
+        //     res.status(400).send("passwords not comfirm")
+        // }
 
         const user = await userService.createService(req.body)
 
@@ -30,6 +30,7 @@ export const create = async (req, res, next)=>{
             user:{
                 id: user._id,
                 nome,
+                usuario,
                 email
             }
         })

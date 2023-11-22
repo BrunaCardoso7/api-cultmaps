@@ -22,7 +22,6 @@ import userRouter from './routes/usersRouters.js'
 
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
-
 app.use('/eventos', eventsRouter)
 
 const port = process.env.PORT || 3000

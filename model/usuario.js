@@ -5,21 +5,29 @@ const usuarioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    usuario:{
+        type: String,
+        required: true
+    },
     email:{
         type: String,
         required: true,
         unique:true,
+    },
+    bairro: {
+        type: String,
+        required: true,
     },
     password:{
         type: String,
         required: true,
         select: false,
     },
-    passwordConfirm:{
-        type: String,
-        required: true,
-        select: false,
-    }
+    // passwordConfirm:{
+    //     type: String,
+    //     required: true,
+    //     select: false,
+    // }
 })
 
 usuarioSchema.pre("save", async function (next){
