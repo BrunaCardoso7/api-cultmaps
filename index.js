@@ -13,8 +13,8 @@ dotenv.config()
 
 import './conn/conn.js'
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 import authRouter from './routes/authRouter.js'
 import eventsRouter from './routes/eventosRouters.js'
