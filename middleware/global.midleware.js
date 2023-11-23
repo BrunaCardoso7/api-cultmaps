@@ -3,19 +3,24 @@ import userService from '../services/user.service.js'
 
 
 export const validId = async(req, res, next)=>{
-    let idParam;
+  let idParam;
 
-    if (!req.params.id && req.userId) {
+  if (!req.params.id && req.userId) {
+    if (mongoose.Types.ObjectId.isValid(req.userId)) {
       req.params.id = req.userId;
-    }
-  
-    idParam = req.params.id;
-  
-    if (!mongoose.Types.ObjectId.isValid(idParam)) {
+    } else {
       return res.status(400).send({ message: "Invalid id!" });
     }
-  
-    next();
+  }
+
+  idParam = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(idParam)) {
+    return res.status(400).send({ message: "Invalid id!" });
+  }
+
+  next();
+
 }
 export const validUser = async(req, res, next)=>{
     const userId = req.params.id
