@@ -1,7 +1,7 @@
 import Usuario from '../model/usuario.js'
 import bcrypt from 'bcrypt'
 import jwt  from 'jsonwebtoken';
-import userService from '../services/user.service.js'
+import {findByIdUserService} from '../services/user.service.js'
 import dotenv from 'dotenv'
 dotenv.config()
 // const validations = require('../validations/validation')
@@ -58,7 +58,7 @@ export const findAll = async(req, res)=>{
 
 export const findById = async(req, res)=>{
     try {
-        const user = await userService.findUserByIdService(
+        const user = await findByIdUserService(
           req.params.id,
           req.userId
         );

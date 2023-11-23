@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import jwt  from 'jsonwebtoken'
-import userService from '../services/user.service.js'
+import  { findByIdUserService } from '../services/user.service.js'
 dotenv.config()
 
 const secret = process.env.SECRET
@@ -30,7 +30,7 @@ export const authMiddleware = (req, res, next)=>{
                 res.status(500).send("error verify: " + error)
             }
             console.log(decoded)
-            const user = await userService.findByIdUserService(decoded.id)
+            const user = await findByIdUserService(decoded.id)
             if(!user || !decoded.id){   
                 res.status(401).send({msg: "usuerId not fount"})
             }
