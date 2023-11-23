@@ -1,6 +1,18 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 const usuarioSchema = new mongoose.Schema({
+    perfil:{
+        src: {
+            type: String,
+            required: true
+          }
+    },
+    background:{
+        src: {
+            type: String,
+            required: true
+          }
+    },
     nome:{
         type: String,
         required: true
