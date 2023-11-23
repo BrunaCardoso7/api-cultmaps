@@ -1,7 +1,7 @@
 import Usuario from '../model/usuario.js'
 import bcrypt from 'bcrypt'
 import jwt  from 'jsonwebtoken';
-import {findByIdUserService} from '../services/user.service.js'
+import {findByIdUserService,createService} from '../services/user.service.js'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
 dotenv.config()
@@ -22,7 +22,7 @@ export const create = async (req, res, next)=>{
         //     res.status(400).send("passwords not comfirm")
         // }
 
-        const user = await userService.createService(req.body)
+        const user = await createService(req.body)
 
         if(!user){
             return res.status(500).send({msg:"error creating user"})
