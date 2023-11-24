@@ -4,7 +4,7 @@ const usuarioSchema = new mongoose.Schema({
     perfil:{
         src: {
             type: String,
-            default: 'https://cdn-icons-png.flaticon.com/512/64/64572.png'
+            default: 'https://e1.pxfuel.com/desktop-wallpaper/601/246/desktop-wallpaper-bald-gojo-gojo-drip.jpg '
           }
     },
     background:{
