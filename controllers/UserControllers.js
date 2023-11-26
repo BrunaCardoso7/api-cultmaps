@@ -10,9 +10,9 @@ import { generateToken } from '../services/auth.service.js';
 
 export const create = async (req, res, next)=>{
     try {
-        const {avatar, background, nome, usuario, email, password} = req.body
+        const {avatar, background, nome, email, password} = req.body
 
-        if(!nome|| !usuario || !email || !password){
+        if(!nome|| !email || !password){
             res.status(400).send("preencha todos os campos")
         }
     
@@ -35,7 +35,6 @@ export const create = async (req, res, next)=>{
                 avatar,
                 background,
                 nome,
-                usuario,
                 email
             }
         })
