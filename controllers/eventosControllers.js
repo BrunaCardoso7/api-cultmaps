@@ -40,7 +40,7 @@ export const getAll = async(req, res)=>{
         offset = Number(offset)
 
         if(!limit){
-            limit = 5
+            limit = 15
         }
         if(!offset){
             offset = 0
