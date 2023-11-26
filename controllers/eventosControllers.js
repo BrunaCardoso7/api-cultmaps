@@ -25,9 +25,10 @@ export const create =  async(req, res)=>{
 
         const evento = await createService(eventoData)
         
-        res.status(200).json({ msg: "Data saved successfully", evento });
+        return res.status(200).json({ msg: "Data saved successfully", evento });
     } catch (error) {
-        res.status(500).json({msg: "Error saving data "+error})
+        console.log("Erro do servidor:", error);
+        return res.status(500).json({ msg: "Error saving data " + error });
     }
 };
 

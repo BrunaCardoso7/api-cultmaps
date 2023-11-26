@@ -35,8 +35,8 @@ export const authMiddleware = (req, res, next)=>{
                 res.status(401).send({msg: "usuerId not fount"})
             }
             req.userId = user._id
-            return next()
         })
+        return next()
     } catch (error) {
         res.status(500).send(error)
     }

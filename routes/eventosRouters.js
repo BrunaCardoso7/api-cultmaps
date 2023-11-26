@@ -6,7 +6,7 @@ import {authMiddleware} from '../middleware/auth.middleware.js'
 
 const router = Router()
 
-router.post("/", upload.single("file"), create)
+router.post("/", authMiddleware, upload.single("file"), create)
 
 router.get("/", getAll)
 router.get("/top", topEvents)
