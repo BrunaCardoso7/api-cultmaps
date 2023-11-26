@@ -40,7 +40,7 @@ const EventosSchema = new Schema({
     },
     usuario_id:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'usuario_id',
+        ref: 'Usuario',
         require: true
     },
     like:{

@@ -9,6 +9,7 @@ const router = Router()
 router.post("/", authMiddleware, upload.single("file"), create)
 
 router.get("/", getAll)
+
 router.get("/top", topEvents)
 
 router.get("/search", searchByTitle)
