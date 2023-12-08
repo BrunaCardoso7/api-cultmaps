@@ -52,6 +52,10 @@ const EventosSchema = new Schema({
           required: true
         }
     },
+    patrocinadores:{
+        type: String,
+        required: true
+    },
     usuario_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario',
