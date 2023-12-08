@@ -5,9 +5,7 @@ export const findAllService = () =>  users.find()
 export const findByIdUserService = (id) => users.findById(id)
 
 export const updateService = (
+    perfil,
+    background,
     id,
-    nome, 
-    email, 
-    password, 
-    passwordConfirm
-) => users.findByIdAndUpdate({_id: id},{nome, email, password, passwordConfirm})
+) => users.findByIdAndUpdate({_id: id},{ perfil, background})

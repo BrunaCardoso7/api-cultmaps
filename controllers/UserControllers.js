@@ -78,20 +78,17 @@ export const findById = async(req, res)=>{
 
 export const update = async(req, res)=>{
     try {     
-        const {nome, email, password, passwordConfirm} = req.body
-    
-        if(!nome && !email && !password && !passwordConfirm){
-            res.status(400).send("preencha todos os campos")
+        const { perfil, background } = req.files
+        const { id } = req.params
+
+        if(!perfil, !background){
+            res.status(400).send("kd as imagens irmão?")
         }
-    
-        const { id, user } = req
     
         await userService.updateService(
             id,
-            nome, 
-            email, 
-            password,
-            passwordConfirm
+            perfil,
+            background,
         )
         res.send({msg:"user sucessfully updated"})
     } catch (error) {
