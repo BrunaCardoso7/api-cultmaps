@@ -8,11 +8,12 @@ dotenv.config()
 // const validations = require('../validations/validation')
 import { generateToken } from '../services/auth.service.js';
 
+
 export const create = async (req, res, next)=>{
     try {
-        const {avatar, background, nome, email, password} = req.body
+        const {avatar, background, usuario, nome, email, password} = req.body
 
-        if(!nome|| !email || !password){
+        if(!nome|| !usuario || !email || !password){
             res.status(400).send("preencha todos os campos")
         }
     
@@ -34,6 +35,7 @@ export const create = async (req, res, next)=>{
                 id: user._id,
                 avatar,
                 background,
+                usuario,
                 nome,
                 email
             }

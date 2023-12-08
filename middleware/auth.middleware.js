@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import jwt  from 'jsonwebtoken'
 import  { findByIdUserService } from '../services/user.service.js'
+
 dotenv.config()
 
 const secret = process.env.SECRET
