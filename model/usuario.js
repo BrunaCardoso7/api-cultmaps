@@ -4,7 +4,7 @@
         perfil:{
             src: {
                 type: String,
-                default: 'https://e1.pxfuel.com/desktop-wallpaper/601/246/desktop-wallpaper-bald-gojo-gojo-drip.jpg '
+                default: 'sem_foto.png'
             }
         },
         background:{
