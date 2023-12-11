@@ -27,5 +27,5 @@ app.use('/eventos', eventsRouter)
 const port = process.env.PORT || 3000
 
 app.listen(port, ()=>{
-    console.log('o servidor está rodando!')
+    console.log('o servidor está rodando!' + port)
 })

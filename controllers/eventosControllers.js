@@ -83,7 +83,7 @@ export const getAll = async(req, res)=>{
                 localizacao: e.localizacao,
                 like: e.like,
                 comentario: e.comentario,
-                userName: e.usuario_id,
+                userId: e._id,
                 image: e.image.src
             }))
         })
@@ -103,7 +103,7 @@ export const topEvents = async(req, res)=>{
             eventos: {
                 id: eventos._id,
                 nome: eventos.nome,
-                author: eventos.author,
+                autor: eventos.autor,
                 descricao: eventos.descricao,
                 data: eventos.data,
                 categoria: eventos.categoria,
