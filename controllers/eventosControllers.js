@@ -83,7 +83,7 @@ export const getAll = async(req, res)=>{
                 localizacao: e.localizacao,
                 like: e.like,
                 comentario: e.comentario,
-                // userName: e.usuario_id.nome,
+                userName: e.usuario_id,
                 image: e.image.src
             }))
         })
