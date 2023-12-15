@@ -15,6 +15,7 @@ router.get("/top", topEvents)
 router.get("/search", searchByTitle)
 
 router.get("/byUser", authMiddleware, byUser)
+
 router.patch("/:id", authMiddleware, update)
 router.delete("/:id", authMiddleware, areser)
 router.get("/:id", authMiddleware ,findById)

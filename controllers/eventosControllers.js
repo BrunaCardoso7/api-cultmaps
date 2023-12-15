@@ -76,7 +76,7 @@ export const getAll = async(req, res)=>{
             results: evento.map(e => ({
                 id: e._id,
                 nome: e.nome,
-                author: e.author,
+                autor: e.autor,
                 descricao: e.descricao,
                 data: e.data,
                 categoria: e.categoria,
@@ -110,7 +110,8 @@ export const topEvents = async(req, res)=>{
                 localizacao: eventos.localizacao,
                 like: eventos.like,
                 comentario: eventos.comentario,
-                userName: eventos.usuario_id.nome,
+                userId: e.userId,
+                userName: eventos.userId.nome,
                 image: eventos.image.src
             }
         })
@@ -129,14 +130,15 @@ export const findById = async(req, res)=>{
             eventos: {
                 id: event._id,
                 nome: event.nome,
-                author: event.author,
+                autor: event.autor,
                 descricao: event.descricao,
                 data: event.data,
                 categoria: event.categoria,
                 localizacao: event.localizacao,
                 like: event.like,
                 comentario: event.comentario,
-                userName: event.usuario_id.nome,
+                userId: e.userId,
+                userName: e.userId.nome,
                 image: event.image.src
             }
         })
@@ -174,8 +176,10 @@ export const searchByTitle = async(req, res)=>{
 }
 export const byUser = async(req, res)=>{
     try {
-        const id = req.userId
+        const { id } = req.params
+
         const user = await byUserService(id)
+
         return res.send({
             results: user.map(u => ({
                 id: u._id,
@@ -187,8 +191,9 @@ export const byUser = async(req, res)=>{
                 localizacao: u.localizacao,
                 like: u.like,
                 comentario: u.comentario,
-                userName: u.usuario_id.nome,
-                image: u.image.src
+                userId: u.userId, 
+                userName: u.userId.nome,
+                image: u.image.src,
             }))
         })
     } catch (error) {
