@@ -3,7 +3,7 @@ import { createService, findAllService,countEvents, topEventsService, findByIdEv
 export const create =  async(req, res)=>{
     try {
         const {nome, autor, descricao, dataOpt, faixaEtaria, patrocinadores, categoria, data, localizacao} = req.body
-        const usuario_id = req. const src = req.file ? req.file.path : undefined;
+        const src = req.file ? req.file.path : undefined;
         
         if(!nome|| !autor|| !descricao||!categoria|| !data|| !localizacao){
             res.status(400).send({msg: "inform camp all"})
