@@ -4,13 +4,14 @@ export const create =  async(req, res)=>{
     try {
         const {nome, autor, descricao, dataOpt, faixaEtaria, patrocinadores, categoria, data, localizacao} = req.body
         const src = req.file ? req.file.path : undefined;
-        
+        const userId = req.body.userId
         if(!nome|| !autor|| !descricao||!categoria|| !data|| !localizacao){
             res.status(400).send({msg: "inform camp all"})
         }
 
         const eventoData ={
             nome, 
+            userId,
             autor,
             dataOpt,
             faixaEtaria,
