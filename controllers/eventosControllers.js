@@ -192,7 +192,6 @@ export const byUser = async(req, res)=>{
                 like: u.like,
                 comentario: u.comentario,
                 userId: u.userId, 
-                userName: u.userId.nome,
                 image: u.image.src,
             }))
         })
