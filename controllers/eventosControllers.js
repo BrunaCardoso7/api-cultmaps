@@ -19,7 +19,6 @@ export const create =  async(req, res)=>{
             categoria, 
             data, 
             localizacao,
-            usuario_id,
             image: {
                 src
             }
