@@ -56,7 +56,7 @@ const EventosSchema = new Schema({
         type: String,
         required: true
     },
-    usuario_id:{
+    userId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario',
         require: true
